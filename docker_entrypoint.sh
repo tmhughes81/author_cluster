@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /code
+cd /code/acp
 /usr/bin/python /code/acp/manage.py migrate
 /usr/bin/python /code/acp/manage.py runserver 0.0.0.0:8000
