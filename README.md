@@ -1,6 +1,11 @@
 # author_cluster
 WebApp to visualize clusters of authors utilizing TF-IDF
 
+# Development Status
+**Minimal Development Completed**!  As of this update, this project only deploys
+a basic Django shell, with no internals.  Watch this space for updates on
+development status.
+
 # Deployment
 There is no current publicly available running instance of this WebApp.  However, you
 are free to deploy your own version of it to any hosting service that can take a
@@ -13,3 +18,29 @@ from the public repositories by pulling `tmhughes81/author_cluster`.
 The visualizations from this program are available under 
 [Creative Commons Attribution 2.0](https://creativecommons.org/licenses/by/2.0/legalcode).
 A summary of the license is available [here](https://creativecommons.org/licenses/by/2.0/).
+
+## Code
+Copyright (c) 2017, Thomas M Hughes
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Thomas M Hughes nor the names of any contributors 
+      may be used to endorse or promote products derived from this software 
+      without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THOMAS M HUGHES BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
