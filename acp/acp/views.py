@@ -17,4 +17,9 @@ def logout_view(request):
     
     return render(request, "index.html", args)
 
+def faq(request):
+    args = {}
+    
+    return render(request, "faq.html", args)
+
     

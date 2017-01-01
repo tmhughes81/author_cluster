@@ -1,0 +1,134 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+   <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href={% static "bootstrap/css/dashboard.css" %} rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+	<script src={% static "bootstrap/js/jquery.relevant-dropdown.js" %}></script>
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Document Clustering Project</a>
+        </div>
+        
+        
+        <div id="navbar" class="navbar-collapse collapse">
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a href="/faq/">FAQ</a></li>
+	        {% if user.is_authenticated %}
+			<li><a href="/dashboard/">Dashboard</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">{{ user }}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/logout/">Logout</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li><a href="/">Home</a></li>
+            {% endif%}
+	      </ul>
+        </div>
+      </div>
+    </nav>
+ 
+     <div class="container">
+       <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Frequently Asked Questions</h1>
+        <p>Answers to common questions, technical and otherwise.</p>
+      </div>
+	
+		<div class="container">
+			<h2>How are the clusters calculated?</h2>
+			<p>The short answer is running the documents through TF-IDF, and then
+			reducing the dimensionality down to two by using LSA.  The dimensionality
+			reduction allows the clusters to be visualized in two dimensional space.</p>
+			<p>If you are not familiar with those techniques, keep reading.</p>
+
+			<h2>What is TF-IDF?</h2>
+			<p>It stands for "Term Frequency - Inverse Document Frequency."
+			In essence, the algorithm will take a total of how often each
+			word in a document occurs (the term frequency).  That number is
+			then weighted against how rarely that term appears across all of
+			the documents in the corpus.</p>
+			<p>You don't just want to use the term frequency, because then you
+			would get a large number of very common words that are present in
+			every document.  Such words do not tell us much about what is
+			distinctive about a particular document.  By weighting by the
+			inverse document frequency, words that are common in a single
+			document, but rare across the corpus, must be distinctive and
+			important for this document.</p>
+			
+			<h2>What is LSA?</h2>
+			
+			LSA stands for "Latent Semantic Analysis."  Sometimes it is also
+			referred to as "truncated singular value decomposition."  It is
+			a technique that is known to deal with the fact that words often
+			have multiple meanings.  It can also be utilized, as we are here,
+			to reduce the number of dimensions from the results of the
+			TF-IDF algorithm.</p>
+			
+			<p>In machine learning, each unique word from the document would be
+			treated as its own dimension.  Thus, if a document has 3,000 unique
+			words, the result from the TF-IDF would be a value containing
+			3,000 dimensions.  Visualizing such a space is practically impossible.
+			Thus, to visualize the results of the TF-IDF, LSA allows us to
+			reduce the number of dimensions down to two.  This allows the
+			creation of the scatterplots we provide in the visualizations.</p>
+			
+			<p>A proper technical explanation, including the math, can be found
+			<a href=http://scikit-learn.org/stable/modules/decomposition.html#lsa>
+			here</a>.</p>
+			
+		</div>
+    </div> <!-- /container -->
+ 	
+ 	
+ 
+ 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+ 

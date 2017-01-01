@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'', include('social_auth.urls')),
     url(r'^dashboard', views.dashboard, name='dashboard'),
+    url(r'^faq', views.faq, name='faq'),
     url(r'^logout', views.logout_view, name='logout'),
 ]

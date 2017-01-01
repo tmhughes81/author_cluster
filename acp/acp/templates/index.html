@@ -20,6 +20,7 @@
 		  text-shadow: 0 1px 3px rgba(0,0,0,.5);
 		 
 		}
+		
 	</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,16 +66,16 @@
               <nav>
                 <ul class="nav masthead-nav">
                   <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">FAQ</a></li>
+                  <li><a href="/faq/">FAQ</a></li>
                   <li><a href="#">Contact</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Welcome!</h1>
-            <p class="lead">You have reached the Document Clustering Project, an open source WebApp for visualizing patterns of word uses in corpa of texts.</p>
+          <div class="inner cover" style="background-color: lightslategray; border-radius: 10px;padding-top: 40px;padding-bottom: 10px;">
+            <h1 class="cover-heading" font="Monteserrat">Welcome!</h1>
+            <p class="lead" font="Monteserrat">You have reached the Document Clustering Project, an open source WebApp for visualizing patterns of word uses in corpa of texts.</p>
             <p class="lead">
               <a href="{% url "socialauth_begin" "google-oauth2" %}" class="btn btn-lg btn-default">Login with Google</a>
             </p>
