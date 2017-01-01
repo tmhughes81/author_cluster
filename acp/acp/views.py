@@ -9,7 +9,7 @@ def index(request):
 
 def dashboard(request):
     args = {}
-    return render(request, "index.html", args)
+    return render(request, "dashboard.html", args)
     
 def logout_view(request):
     args = {}
