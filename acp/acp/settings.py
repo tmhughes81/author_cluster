@@ -55,7 +55,8 @@ ROOT_URLCONF = 'acp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                 os.path.join(BASE_DIR, 'acp/templates/'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,4 +100,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/bootstrap/'
