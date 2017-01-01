@@ -1,7 +1,7 @@
 # author_cluster
 WebApp to visualize clusters of authors utilizing TF-IDF
 
-# Development Status
+## Development Status
 **Minimal Development Completed**!  As of this update, this project only deploys
 a basic Django shell, with no internals.  Watch this space for updates on
 development status.
@@ -12,6 +12,14 @@ are free to deploy your own version of it to any hosting service that can take a
 [Docker](https://www.docker.com) image.  The image is hosted on
 [Docker Hub](https://hub.docker.com/r/tmhughes81/author_cluster/), and can be pulled
 from the public repositories by pulling `tmhughes81/author_cluster`.
+
+# Dependencies
+
+* [Python](https://www.python.org/downloads/release/python-2713/) - 2.7.13
+
+* [Django](https://www.djangoproject.com)
+
+* (Optional) [Docker](https://www.docker.com)
 
 # Licenses
 ## Visualizations
