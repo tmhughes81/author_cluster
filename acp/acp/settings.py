@@ -37,7 +37,28 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_auth',
 )
+
+# Social Authenticators
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+
+GOOGLE_OAUTH2_CLIENT_ID      = '302448374329-pplcaol60jfq1cd8i65itvse8nfvo88e.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'whyN_a3L45ls2zT6wQsPkFf2'
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,6 +89,13 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+)
 
 WSGI_APPLICATION = 'acp.wsgi.application'
 

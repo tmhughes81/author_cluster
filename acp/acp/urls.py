@@ -20,4 +20,7 @@ from . import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
+    url(r'', include('social_auth.urls')),
+    url(r'^dashboard', views.dashboard, name='dashboard'),
+    url(r'^logout', views.logout_view, name='logout'),
 ]
