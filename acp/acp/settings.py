@@ -130,4 +130,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/bootstrap/'
+STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/'
