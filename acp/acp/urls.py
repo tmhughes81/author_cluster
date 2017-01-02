@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^dashboard', views.dashboard, name='dashboard'),
     url(r'^faq', views.faq, name='faq'),
     url(r'^logout', views.logout_view, name='logout'),
+    url(r'^corpus', views.corpus, name='corpus'),
 ]

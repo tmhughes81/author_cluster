@@ -14,6 +14,7 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
+
    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -117,14 +118,25 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Corpus</th>
+                  <th>Categories</th>
+                  <th>Documents</th>
+                  <th>Public</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
+              	{% if corpa %}
+              		{% for corpus in corpa %}
+              			<tr>
+              				<td>{{corpus.name}}</td>
+							<td></td>
+							<td></td>
+							<td>{{corpus.public}}</td>         
+							<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>     				
+              			</tr>
+              		{% endfor %}
+              	{% endif %}
                 <tr>
                   <td>1,001</td>
                   <td>Lorem</td>
@@ -240,7 +252,17 @@
               </tbody>
             </table>
           </div>
+			<h2 class="sub-header">Create a New Course</h2>
+			<form action="/corpus/" method="post">{% csrf_token %}
+				<table>
+					{{form.as_table}}
+				</table>
+			
+				<button class="btn btn-sm btn-primary" type="submit" name="submit">Create New Corpus</button><a href="/remove_corpus/{{corpus.id}}/">
+			</form>
+
         </div>
+
       </div>
     </div>
 
