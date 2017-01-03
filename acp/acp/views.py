@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import logout
-from forms import CreateCorpusForm
-from models import Corpus, CorpusOwners
+from forms import CreateCorpusForm, AddDocForm, AddCatForm
+from models import Corpus, CorpusOwners, Category, Document
 from django.contrib.auth.models import User
 
 def index(request):
@@ -22,6 +22,32 @@ def dashboard(request):
     args.update({'form': form})
         
     return render(request, "dashboard.html", args)
+
+
+def corpus(request, corpus_id):
+
+    args = {}
+    
+    corpus = Corpus.objects.get(id=corpus_id)
+    
+    args.update({'corpus': corpus})
+    
+    categories = Category.objects.filter(corpus=corpus)
+    
+    args.update({'categories': categories})
+    
+    documents = Document.objects.filter(corpus=corpus)
+    
+    args.update({'documents': documents})
+    
+    cat_form = AddCatForm()
+    args.update({'cat_form': cat_form})
+    
+    doc_form = AddDocForm()
+    
+    args.update({'doc_form': doc_form})
+    
+    return render(request, "corpus.html", args)
     
 def logout_view(request):
     args = {}
@@ -61,3 +87,35 @@ def del_corpus(request, corpus_id):
     Corpus.objects.get(id=corpus_id).delete()
     
     return HttpResponseRedirect('/dashboard/')
+
+def add_doc(request, corpus_id):
+    if request.POST:
+        form = AddDocForm(request.POST, request.FILES)
+        if form.is_valid():
+            """ First the Corpus object """
+            doc = form.save(commit=False)
+            
+            doc.owner = request.user
+            doc.corpus = Corpus.objects.get(id=corpus_id)
+            doc.category = Category.objects.get(name='Pasta')
+            doc.save()
+    else:
+        HttpResponseRedirect('/')
+    
+    url = '/corpus/'+corpus_id
+    
+    return HttpResponseRedirect(url)
+
+def add_cat(request, corpus_id):
+    if request.POST:
+        form = AddCatForm(request.POST)
+        if form.is_valid():
+            cat_form = form.save(commit=False)
+            cat_form.corpus = Corpus.objects.get(id=corpus_id)
+            cat_form.save()
+    else:
+        HttpResponseRedirect('/')
+    
+    url = '/corpus/'+corpus_id
+    
+    return HttpResponseRedirect(url)

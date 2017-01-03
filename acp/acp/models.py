@@ -25,8 +25,8 @@ class Category(models.Model):
     """ A sub-category attached to a corpus (often an author) """
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
-    color = models.CharField(max_length=64)
-    mark = models.CharField(max_length=64)
+    color = models.CharField(max_length=64, default='blue')
+    mark = models.CharField(max_length=64, default='*')
     labels = models.BooleanField(default=False)
 
 class Document(models.Model):
@@ -35,6 +35,6 @@ class Document(models.Model):
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
     category = models.ForeignKey('Category')
-    uri = models.URLField()
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    file = models.FileField(default=None, upload_to='uploads/')
     

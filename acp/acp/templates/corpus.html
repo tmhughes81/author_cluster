@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>{{corpus.name}}</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -40,7 +40,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Document Clustering Project</a>
+          <a class="navbar-brand" href="/">Document Clustering Project</a>
         </div>
         
         
@@ -94,45 +94,57 @@
           </div>
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Cluster Dashboard</h1>
+          <h1 class="page-header">{{corpus.name}}</h1>
           
 
-          <h2 class="sub-header">Available Corpa</h2>
+          <h2 class="sub-header">Available Documents</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Corpus</th>
-                  <th>Categories</th>
-                  <th>Documents</th>
-                  <th>Public</th>
+                  <th>Document Title</th>
+                  <th>Category</th>
+                  <th></th>
+                  <th></th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-              	{% if corpa %}
-              		{% for corpus in corpa %}
+              	{% if documents %}
+              		{% for doc in documents %}
               			<tr>
-              				<td><a href='/corpus/{{corpus.id}}/'>{{corpus.name}}</a></td>
-							<td>{{corpus.cat_count}}</td>
-							<td>{{corpus.doc_count}}</td>
-							<td>{{corpus.public}}</td>         
-							<td><a href="/del_corpus/{{corpus.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>     				
+              				<td>{{doc.name}}</td>
+							<td>{{doc.category.name}}</td>
+							<td></td>
+							<td></td>         
+							<td><a href="/del_doc/{{corpus.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>     				
               			</tr>
               		{% endfor %}
               	{% endif %}
               </tbody>
             </table>
-          </div>
-			<h2 class="sub-header">Create a New Corpus</h2>
-			<form action="/create_corpus/" method="post">{% csrf_token %}
+
+			<h2 class="sub-header">Create a New Category</h2>
+			<form action="/add_cat/{{corpus.id}}/" method="post">{% csrf_token %}
 				<table>
-					{{form.as_table}}
+					{{cat_form.as_table}}
 				</table>
 			
-				<button class="btn btn-sm btn-primary" type="submit" name="submit">Create New Corpus</button>
+				<button class="btn btn-sm btn-primary" type="submit" name="submit">Create Category</button>
 			</form>
 
+
+			<h2 class="sub-header">Add a Document File</h2>
+			<form enctype="multipart/form-data" action="/add_doc/{{corpus.id}}/" method="post">{% csrf_token %}
+				<table>
+					{{doc_form.as_table}}
+				</table>
+			
+				<button class="btn btn-sm btn-primary" type="submit" name="submit">Upload Document</button>
+			</form>
+            
+            
+          </div>
         </div>
 
       </div>
