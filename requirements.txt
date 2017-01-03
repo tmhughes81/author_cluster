@@ -2,6 +2,5 @@ Django
 mysql-python
 gunicorn
 django-social-auth
-google-cloud
-google-api-python-client
+django-cleanup
 django-google-cloud-storage

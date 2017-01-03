@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+import os
 
 class Corpus(models.Model):
     """ A collection of categories and documents that will be clustered """
@@ -37,4 +38,9 @@ class Document(models.Model):
     category = models.ForeignKey('Category')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
     file = models.FileField(default=None, upload_to='uploads/')
-    
+
+    def delete(self,*args,**kwargs):
+        if os.path.isfile(self.file.path):
+            os.remove(self.file.path)
+
+        super(Document, self).delete(*args,**kwargs)    

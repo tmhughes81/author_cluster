@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^corpus/(?P<corpus_id>\d+)/$', views.corpus, name='corpus'),
     url(r'^add_doc/(?P<corpus_id>\d+)/$', views.add_doc, name='add_doc'),
     url(r'^add_cat/(?P<corpus_id>\d+)/$', views.add_cat, name='add_cat'),
+    url(r'^del_doc/(?P<doc_id>\d+)/$', views.del_doc, name='del_doc'),
 ]

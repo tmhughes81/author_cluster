@@ -119,3 +119,12 @@ def add_cat(request, corpus_id):
     url = '/corpus/'+corpus_id
     
     return HttpResponseRedirect(url)
+
+def del_doc(request, doc_id):
+    """ Deletes a corpus """
+    if not Document.objects.filter(id=doc_id).exists():
+        return HttpResponseRedirect('/corpus/not_found/')
+    
+    Document.objects.get(id=doc_id).delete()
+    
+    return HttpResponseRedirect('/dashboard/')
