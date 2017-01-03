@@ -5,6 +5,8 @@ class Corpus(models.Model):
     """ A collection of categories and documents that will be clustered """
     name = models.CharField(max_length=64) # Name of the Corpus
     public = models.BooleanField(default=False)
+    cat_count = models.IntegerField(default=0)
+    doc_count = models.IntegerField(default=0)
 
 class CorpusOwners(models.Model):
     """ More than one person can own a Corpus; this gives them editing rights """
