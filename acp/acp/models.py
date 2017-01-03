@@ -13,6 +13,13 @@ class CorpusOwners(models.Model):
     corpus = models.ForeignKey('Corpus')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
     
+    """ Gets called as part of corpus creation """    
+    @classmethod
+    def create_owners(cls, user, corpus):
+        entry = cls(owner=user, corpus=corpus)
+        
+        return entry
+    
 
 class Category(models.Model):
     """ A sub-category attached to a corpus (often an author) """

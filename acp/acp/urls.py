@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^dashboard', views.dashboard, name='dashboard'),
     url(r'^faq', views.faq, name='faq'),
     url(r'^logout', views.logout_view, name='logout'),
-    url(r'^corpus', views.corpus, name='corpus'),
+    url(r'^create_corpus', views.create_corpus, name='corpus'),
+    url(r'^del_corpus/(?P<corpus_id>\d+)/$', views.del_corpus, name='del_corpus'),
+    url(r'^corpus/(?P<corpus_id>\d+)/$', views.corpus, name='corpus'),
 ]
