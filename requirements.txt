@@ -1,6 +1,4 @@
 Django
 mysql-python
 gunicorn
-django-social-auth
-django-cleanup
-django-google-cloud-storage
+django-allauth
