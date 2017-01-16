@@ -12,7 +12,8 @@ tail -n 0 -f /srv/logs/*.log &
 
 # Start Gunicorn processes
 echo Starting Gunicorn.
-exec gunicorn acp.wsgi:application \
+cd /code/acp
+exec gunicorn wsgi:application \
     --name acp \
     --bind 0.0.0.0:8000 \
     --workers 3 \
