@@ -37,14 +37,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'acp',
 )
 
 # Social Authenticators
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.google.GoogleOAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
@@ -56,8 +60,6 @@ LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGIN_ERROR_URL    = '/login-error/'
 
-SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
-SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
@@ -85,11 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'social_auth.context_processors.social_auth_by_name_backends',
-                'social_auth.context_processors.social_auth_backends',
-                'social_auth.context_processors.social_auth_by_type_backends',
-                'social_auth.context_processors.social_auth_login_redirect',
+                'django.contrib.messages.context_processors.messages',                
 
             ],
         },
@@ -130,3 +128,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/'
+
+SITE_ID = 2

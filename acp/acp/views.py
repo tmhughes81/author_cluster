@@ -95,9 +95,8 @@ def add_doc(request, corpus_id):
             """ First the Corpus object """
             doc = form.save(commit=False)
             
-            doc.owner = request.user
             doc.corpus = Corpus.objects.get(id=corpus_id)
-            doc.category = Category.objects.get(name='Pasta')
+            doc.category = Category.objects.get(name=request.POST['category'])
             doc.save()
     else:
         HttpResponseRedirect('/')
@@ -121,10 +120,19 @@ def add_cat(request, corpus_id):
     return HttpResponseRedirect(url)
 
 def del_doc(request, doc_id):
-    """ Deletes a corpus """
+    """ Deletes a document """
     if not Document.objects.filter(id=doc_id).exists():
         return HttpResponseRedirect('/corpus/not_found/')
     
     Document.objects.get(id=doc_id).delete()
+    
+    return HttpResponseRedirect('/dashboard/')
+
+def del_cat(request, cat_id):
+    """ Deletes a category """
+    if not Category.objects.filter(id=cat_id).exists():
+        return HttpResponseRedirect('/corpus/not_found/')
+    
+    Category.objects.get(id=cat_id).delete()
     
     return HttpResponseRedirect('/dashboard/')

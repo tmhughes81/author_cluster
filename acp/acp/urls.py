@@ -20,7 +20,7 @@ from . import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'', include('social_auth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^dashboard', views.dashboard, name='dashboard'),
     url(r'^faq', views.faq, name='faq'),
     url(r'^logout', views.logout_view, name='logout'),
@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^add_doc/(?P<corpus_id>\d+)/$', views.add_doc, name='add_doc'),
     url(r'^add_cat/(?P<corpus_id>\d+)/$', views.add_cat, name='add_cat'),
     url(r'^del_doc/(?P<doc_id>\d+)/$', views.del_doc, name='del_doc'),
+    url(r'^del_cat/(?P<cat_id>\d+)/$', views.del_cat, name='del_cat'),
 ]

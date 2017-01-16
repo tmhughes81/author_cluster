@@ -36,7 +36,6 @@ class Document(models.Model):
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
     category = models.ForeignKey('Category')
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
     file = models.FileField(default=None, upload_to='uploads/')
 
     def delete(self,*args,**kwargs):
