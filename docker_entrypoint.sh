@@ -1,4 +1,5 @@
 #!/bin/bash
+
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 /usr/bin/python /code/acp/manage.py migrate
@@ -18,4 +19,5 @@ exec gunicorn acp.wsgi:application \
     --log-level=info \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
+    --preload \
     "$@"
