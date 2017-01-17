@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages;/code/acp
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/code/acp
 
 /usr/bin/python /code/acp/manage.py migrate
 /usr/bin/python /code/acp/manage.py collectstatic --noinput  # Collect static files
@@ -12,6 +12,8 @@ tail -n 0 -f /srv/logs/*.log &
 
 # Start Gunicorn processes
 echo Starting Gunicorn.
+
+pwd
 
 exec gunicorn wsgi:application \
     --name acp \
