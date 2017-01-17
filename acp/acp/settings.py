@@ -142,4 +142,4 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/'
 
-SITE_ID = 2
+SITE_ID = 3
