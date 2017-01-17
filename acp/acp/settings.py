@@ -100,12 +100,23 @@ WSGI_APPLICATION = 'acp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'acp',
+#        'HOST': '104.196.23.74',
+#        'USER': 'root',
+#    }
+#}
+
+DATABASES = {    
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'acp',
-        'HOST': '104.196.23.74',
-        'USER': 'root',
+        'NAME': 'dcp-django-db',
+        'USER' : 'root',
+        'PASSWORD' : '3XJtiKaD',
+        'HOST' : 'dcp-django-db.cjsjsi6ondkw.us-east-1.rds.amazonaws.com',
+        'PORT' : '3306',
     }
 }
 
