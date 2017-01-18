@@ -19,8 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cqp%*#%zibl)euua7frkdjqaq8gxrjhf4^c&_ep0qvlhl*ix1*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -53,8 +51,6 @@ AUTHENTICATION_BACKENDS = (
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
-GOOGLE_OAUTH2_CLIENT_ID      = '302448374329-pplcaol60jfq1cd8i65itvse8nfvo88e.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET  = 'whyN_a3L45ls2zT6wQsPkFf2'
 
 LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/dashboard/'
@@ -97,28 +93,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'acp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'acp',
-#        'HOST': '104.196.23.74',
-#        'USER': 'root',
-#    }
-#}
 
-DATABASES = {    
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dcp-django-db',
-        'USER' : 'root',
-        'PASSWORD' : '3XJtiKaD',
-        'HOST' : 'dcp-django-db.cjsjsi6ondkw.us-east-1.rds.amazonaws.com',
-        'PORT' : '3306',
-    }
-}
+
+
 
 
 # Internationalization
@@ -140,6 +118,11 @@ USE_TZ = True
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
-STATIC_URL = 'https://storage.googleapis.com/total-now-154323.appspot.com/'
+STATIC_URL = 'https://s3.amazonaws.com/dcp-django-bucket/'
 
 SITE_ID = 3
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
