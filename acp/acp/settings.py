@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -94,11 +99,6 @@ WSGI_APPLICATION = 'acp.wsgi.application'
 
 
 
-
-
-
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -122,7 +122,3 @@ STATIC_URL = 'https://s3.amazonaws.com/dcp-django-bucket/'
 
 SITE_ID = 3
 
-try:
-    from local_settings import *
-except ImportError:
-    pass

@@ -2,13 +2,6 @@
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/code/acp
 
-mkdir /efs
-mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-dbb51192.efs.us-east-1.amazonaws.com:/ /efs
-
-cd /efs
-pwd
-ls
-
 /usr/bin/python /code/acp/manage.py migrate
 /usr/bin/python /code/acp/manage.py collectstatic --noinput  # Collect static files
 
