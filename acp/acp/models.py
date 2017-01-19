@@ -42,4 +42,9 @@ class Document(models.Model):
     def delete(self,*args,**kwargs):
         self.file.delete()
 
+class Visual(models.Model):
+    """ Stores meta data about visuals created for corpa """
+    corpus = models.ForeignKey('Corpus')
+    file = models.FileField(default=None, blank=True)
+    
         super(Document, self).delete(*args,**kwargs)    
