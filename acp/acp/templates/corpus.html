@@ -97,6 +97,16 @@
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">{{corpus.name}}</h1>
+
+          {% if visual %}
+		  <h2 class="subheader">Visualization</h2>
+		  <img src={% static visual_file %}>
+		  
+		  {% endif %}
+          <form action="/visualize/" method="post">{% csrf_token %}
+          	<input type="hidden" name="corpus_id" value="{{corpus.id}}">
+			<center><button class="btn btn-sm btn-primary" type="submit" name="visualize">Visualize Corpus</button></center>
+		  </form>
           
 		  <h2 class="sub-header">Available Categories</h2>
           <div class="table-responsive">
@@ -179,6 +189,7 @@
 			
 				<button class="btn btn-sm btn-primary" type="submit" name="submit">Upload Document</button>
 			</form>
+			
             
             
           </div>

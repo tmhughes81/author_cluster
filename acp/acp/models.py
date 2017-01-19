@@ -46,7 +46,7 @@ class Document(models.Model):
 class Visual(models.Model):
     """ Stores meta data about visuals created for corpa """
     corpus = models.ForeignKey('Corpus')
-    file = models.FileField(default=None, blank=True)
+    file = models.ImageField(default=None, blank=True)
     
     def delete(self,*args,**kwargs):
         self.file.delete()

@@ -1,5 +1,6 @@
 from models import Visual, Category, Document
-from django.core.files.storage import default_storage
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import StringIO
 import pandas as pd
 
 
@@ -7,19 +8,19 @@ def create_visual(corpus):
     """ This function creates a visual model from a submitted corpus """
     
     # Load data
-    cats = Category.objects.get(corpus=corpus)
+    cats = Category.objects.filter(corpus=corpus)
     
     dataset = pd.DataFrame(columns=['meta_category', 'meta_title', 'meta_body'])
     
     for cat in cats:
-        for doc in Document.objects.get(category=cat):
-            f = open(doc.file)
-            s = f.read()
-            f.close
+        for doc in Document.objects.filter(category=cat):
+            doc.file.open()
+            s = doc.file.read()
+            doc.file.close()
             
             dp = {
-                'meta_category': cat,
-                'meta_title': doc,
+                'meta_category': cat.name,
+                'meta_title': doc.name,
                 'meta_body': s
             }
             
@@ -45,12 +46,16 @@ def create_visual(corpus):
     svd.fit(X_set.drop(['meta_category', 'meta_title'], 1))
     
     svd_plotdata = []
-    authors = X_set['meta_category'].unique()
     
+    display_color = []
+    markers = []
     
-    for author in authors:
-        svd_plotdata.append(svd.transform(X_set.loc[X_set['meta_category'] == author].drop(['meta_category', 'meta_title'], 1)))
-
+    for cat in cats:
+        svd_plotdata.append(svd.transform(X_set.loc[X_set['meta_category'] == cat.name].drop(['meta_category', 'meta_title'], 1)))
+        display_color.append(str(cat.color))
+        markers.append(str(cat.mark))
+        
+        
     # Graph the results on a 2D plane
     import matplotlib.pyplot as plt
     
@@ -60,30 +65,29 @@ def create_visual(corpus):
     plt.xlabel('LSA #0')
     plt.ylim(ymin=-1, ymax=1)
     plt.title('Clusters of Texts')
-    
-    display_color = ['red', 'blue', 'green', 'pink', 'cyan', 'orange', 'purple', 'yellow']
+        
     
     # Color index
     ci = 0
     for plotdata in svd_plotdata:
-        plt.scatter(plotdata[:, 0], plotdata[:,1], color=display_color[ci])
+        plt.scatter(plotdata[:, 0], plotdata[:,1], color=display_color[ci], marker=markers[ci])
         ci += 1
 
-    # Turn off interactiveness
-    plt.ioff()
+    filename = 'figure_'+str(corpus.id)+'.png'
     
-    filename = 'figure_'+corpus.id
+    figure = StringIO.StringIO()
+
+    plt.savefig(figure, format="png")
+    figure.seek(0)
+
+    content_file = InMemoryUploadedFile(figure, None, filename, 'image/png', figure.len, None)
+    #content_file = ImageFile(Image.open(figure))
     
-    # Prepare for export
-    f = default_storage.open(filename, 'w')
-    f.write(plt.savefig())
-    f.close()
+
 
     # If visual already exists, delete it so we can replace it with a new one
     vis, created = Visual.objects.get_or_create(corpus=corpus)
     if not created:
         vis.file.delete()
     
-    vis.file = f
-    vis.save()
-    
+    vis.file.save(filename, content_file)

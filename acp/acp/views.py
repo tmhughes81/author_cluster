@@ -2,8 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import logout
 from forms import CreateCorpusForm, AddDocForm, AddCatForm
-from models import Corpus, CorpusOwners, Category, Document
+from models import Corpus, CorpusOwners, Category, Document, Visual
 from django.contrib.auth.models import User
+from cluster import create_visual
 
 def index(request):
     args = {}
@@ -46,6 +47,10 @@ def corpus(request, corpus_id):
     doc_form = AddDocForm()
     
     args.update({'doc_form': doc_form})
+    
+    visual = Visual.objects.get(corpus=corpus)
+    args.update({'visual': visual})
+    args.update({'visual_file': 'corpa/'+str(visual.file)})
     
     return render(request, "corpus.html", args)
     
@@ -137,3 +142,16 @@ def del_cat(request, cat_id):
     Category.objects.get(id=cat_id).delete()
     
     return HttpResponseRedirect('/dashboard/')
+
+def visualize(request):
+    if not request.POST:
+        return HttpResponseRedirect('/visual/not_found/')
+    
+    args = {}
+    
+    corpus = Corpus.objects.get(id=request.POST['corpus_id'])
+    
+    create_visual(corpus)
+    
+    return HttpResponseRedirect('/corpus/'+str(corpus.id))
+    
