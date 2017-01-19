@@ -7,3 +7,4 @@ django-storages
 django-bootstrap3
 sklearn
 matplotlib
+pandas
