@@ -21,6 +21,25 @@ from the public repositories by pulling `tmhughes81/author_cluster`.
 
 * (Optional) [Docker](https://www.docker.com)
 
+# Environment Setup
+For security reasons, a number of settings are set via environmental variables, and not
+inside of settings.py.  If you are going to run your own copy of this software, you must
+set the following environmental variables.
+
+
+For security reasons, a number of settings are set via environmental variables, and not
+inside of settings.py.  If you are going to run your own copy of this software, you must
+set the following environmental variables.
+
+* SECRET_KEY -- Django secret key
+* GOOGLE_OAUTH2_CLIENT_SECRET -- Used for Google oauth2 authentication
+* GOOGLE_OAUTH2_CLIENT_ID -- Used for Google oauth2 authentication
+* DATABASE_PORT -- Port to access Django's MySQL Database
+* DATABASE_HOST -- Host of Django's MySQL Database
+* DATABASE_PASSWORD -- Password to access Django's MySQL Database
+* DATABASE_USER -- User to access Django's MySQL Database
+* DATABASE_NAME -- Name of Django's MySQL Database
+
 # Licenses
 ## Visualizations
 The visualizations from this program are available under 
