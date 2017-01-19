@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'storages',
+    'bootstrap3',
     'acp',
 )
 

@@ -36,10 +36,10 @@ class Document(models.Model):
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
     category = models.ForeignKey('Category')
-    file = models.FileField(default=None, upload_to='uploads/')
+    file = models.FileField(default=None, blank=True)
 
+    # Clean up file when model is deleted
     def delete(self,*args,**kwargs):
-        if os.path.isfile(self.file.path):
-            os.remove(self.file.path)
+        self.file.delete()
 
         super(Document, self).delete(*args,**kwargs)    

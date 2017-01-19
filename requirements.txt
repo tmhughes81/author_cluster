@@ -4,3 +4,4 @@ gunicorn
 django-allauth
 boto3
 django-storages
+django-bootstrap3

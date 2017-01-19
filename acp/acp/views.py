@@ -124,7 +124,8 @@ def del_doc(request, doc_id):
     if not Document.objects.filter(id=doc_id).exists():
         return HttpResponseRedirect('/corpus/not_found/')
     
-    Document.objects.get(id=doc_id).delete()
+    doc = Document.objects.get(id=doc_id)
+    doc.delete()
     
     return HttpResponseRedirect('/dashboard/')
 
