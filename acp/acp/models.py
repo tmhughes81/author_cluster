@@ -41,6 +41,7 @@ class Document(models.Model):
     # Clean up file when model is deleted
     def delete(self,*args,**kwargs):
         self.file.delete()
+        super(Document, self).delete(*args,**kwargs)
 
 class Visual(models.Model):
     """ Stores meta data about visuals created for corpa """
@@ -48,4 +49,5 @@ class Visual(models.Model):
     file = models.FileField(default=None, blank=True)
     
     def delete(self,*args,**kwargs):
-        super(Document, self).delete(*args,**kwargs)    
+        self.file.delete()
+        super(Visual, self).delete(*args,**kwargs)    
