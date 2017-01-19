@@ -13,10 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -121,4 +119,19 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = 'https://s3.amazonaws.com/dcp-django-bucket/'
 
 SITE_ID = 3
+
+DATABASES = {    
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DATABASE_NAME', ''),
+        'USER' : os.environ.get('DATABASE_USER', ''),
+        'PASSWORD' : os.environ.get('DATABASE_PASSWORD', ''),
+        'HOST' : os.environ.get('DATABASE_HOST', ''),
+        'PORT' : os.environ.get('DATABASE_PORT', ''),
+    }
+}
+
+GOOGLE_OAUTH2_CLIENT_ID      = os.environ.get('GOOGLE_OAUTH2_CLIENT_ID', '')
+GOOGLE_OAUTH2_CLIENT_SECRET  = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET', '')
+
 
