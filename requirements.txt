@@ -5,3 +5,5 @@ django-allauth
 boto3
 django-storages
 django-bootstrap3
+sklearn
+matplotlib
