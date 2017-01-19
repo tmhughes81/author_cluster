@@ -47,4 +47,5 @@ class Visual(models.Model):
     corpus = models.ForeignKey('Corpus')
     file = models.FileField(default=None, blank=True)
     
+    def delete(self,*args,**kwargs):
         super(Document, self).delete(*args,**kwargs)    
