@@ -8,3 +8,4 @@ django-bootstrap3
 sklearn
 matplotlib
 pandas
+scipy
