@@ -2,7 +2,7 @@ from models import Visual, Category, Document
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import StringIO
 import pandas as pd
-
+import datetime, time
 
 def create_visual(corpus):
     """ This function creates a visual model from a submitted corpus """
@@ -73,7 +73,10 @@ def create_visual(corpus):
         plt.scatter(plotdata[:, 0], plotdata[:,1], color=display_color[ci], marker=markers[ci])
         ci += 1
 
-    filename = 'figure_'+str(corpus.id)+'.png'
+   
+    timestamp = datetime.datetime.now().strftime('%H%M%S')
+    
+    filename = 'figure_'+str(corpus.id)+timestamp+'.png'
     
     figure = StringIO.StringIO()
 
