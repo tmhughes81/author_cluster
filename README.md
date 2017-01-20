@@ -2,9 +2,7 @@
 WebApp to visualize clusters of authors utilizing TF-IDF
 
 ## Development Status
-**Minimal Development Completed**!  As of this update, this project only deploys
-a basic Django shell, with no internals.  Watch this space for updates on
-development status.
+A rough prototype of the webapp is available at [dcp.tmhughes.org](http://dcp.tmhughes.org/).
 
 # Deployment
 There is no current publicly available running instance of this WebApp.  However, you
@@ -39,6 +37,11 @@ set the following environmental variables.
 * DATABASE_PASSWORD -- Password to access Django's MySQL Database
 * DATABASE_USER -- User to access Django's MySQL Database
 * DATABASE_NAME -- Name of Django's MySQL Database
+* ALLOWED_HOSTS -- Hosts that are allowed to run this webapp
+* DJANGO_DEBUG -- Should be set to 'False' in production
+* AWS_ACCESS_KEY_ID -- If using AWS
+* AWS_SECRET_ACCESS_KEY -- If using AWS
+* AWS_STORAGE_BUCKET_NAME -- If using AWS
 
 # Licenses
 ## Visualizations
