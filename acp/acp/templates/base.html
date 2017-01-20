@@ -71,15 +71,13 @@
 
     </nav>
 	
-	{% block dashboard_menu %}
+	
     <div class="container-fluid" style="padding-top: 38px;">
+      {% block dashboard_menu %}
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar"  style="padding-top: 38px;">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="/dashboard/">Corpa Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Corpus Details</a></li>
-            <li><a href="#">Category Details</a></li>
-            <li><a href="#">Document Details</a></li>
           </ul>
        </div>
        {% endblock %}

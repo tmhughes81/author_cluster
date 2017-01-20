@@ -1,5 +1,6 @@
 from django import forms
 from models import Corpus, Document, Category
+from sre_constants import CATEGORY
 
 class CreateCorpusForm(forms.ModelForm):
     
@@ -19,4 +20,4 @@ class AddCatForm(forms.ModelForm):
     
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['name', 'mark', 'color']

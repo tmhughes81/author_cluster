@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block bootstrap %}
+    <link href={% static "bootstrap/css/dashboard.css" %} rel="stylesheet">
+	<script src={% static "bootstrap/js/jquery.relevant-dropdown.js" %}></script>
+{% endblock %}
+
+{% block dashboard_menu %}
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar"  style="padding-top: 38px;">
+      <ul class="nav nav-sidebar">
+      </ul>
+   </div>
+{% endblock %}
+
+{% block dashboard_body %}        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding-top: 38px;">
+          <h1 class="page-header">Permissions Error</h1>
+		  <p>You do not have permission to take that action.  You are probably 
+		  trying to modify a public corpus that does not belong to you.  If you 
+		  wish to experiment with these
+		  settings, consider making your own corpus, and go from there!</p>
+			<button onclick="goBack()">Go Back</button>
+			
+			<script>
+			function goBack() {
+			    window.history.back();
+			}
+			</script>
+        </div>
+
+{% endblock %}

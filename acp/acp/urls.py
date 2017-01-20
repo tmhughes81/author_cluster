@@ -32,4 +32,7 @@ urlpatterns = [
     url(r'^del_doc/(?P<doc_id>\d+)/$', views.del_doc, name='del_doc'),
     url(r'^del_cat/(?P<cat_id>\d+)/$', views.del_cat, name='del_cat'),
     url(r'^visualize/$', views.visualize, name='visualize'),
+    url(r'^cat/(?P<cat_id>\d+)/$', views.cat, name='cat'),
+    url(r'^perm_error/$', views.perm_error, name='perm_error'),
+    
 ]

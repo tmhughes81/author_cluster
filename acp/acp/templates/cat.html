@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}Corpus: {{this_category.corpus.name}}, Category: {{ this_category.name }}{% endblock %}
+
+{% block bootstrap %}
+    <link href={% static "bootstrap/css/dashboard.css" %} rel="stylesheet">
+	<script src={% static "bootstrap/js/jquery.relevant-dropdown.js" %}></script>
+{% endblock %}
+
+{% block dashboard_menu %}
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar"  style="padding-top: 38px;">
+      <ul class="nav nav-sidebar">
+        <li><a href="/dashboard/">Corpa Overview</a></li>
+        <li><a href="/corpus/{{this_category.corpus.id}}/">Corpa Categories:</a></li>
+        {% if categories %}
+        	{% for category in categories %}
+        		<li{% if category.id == this_category.id %} class="active"{% endif %}>
+        		<a href="/cat/{{category.id}}/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{category.name}}
+        		{% if category.id == this_category.id %}<span class="sr-only">(current)</span>{% endif %}
+        		</a></li>
+        	{% endfor %}
+        {% endif %}
+      </ul>
+   </div>
+{% endblock %}
+
+{% block dashboard_body %}        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding-top: 38px;">
+          <h1 class="page-header">{{this_category.corpus.name}}: {{this_category.name}}</h1>
+		  
+		  <h2 class="sub-header">Edit This Category</h2>
+		  <form action="/add_cat/{{corpus.id}}/" method="post">{% csrf_token %}
+				<table>
+					{{cat_form.as_table}}
+					<input type="hidden" name="id" value={{cat_form.instance.id}}>
+				</table>
+			
+				<button class="btn btn-sm btn-primary" type="submit" name="submit">Edit Category</button>
+			</form>
+		  
+		  
+          <h2 class="sub-header">Available Documents in This Category</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Document Title</th>
+                  <th>Category</th>
+                  <th></th>
+                  <th></th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% if documents %}
+              		{% for doc in documents %}
+              		{% if doc.category.id == this_category.id %}
+              			<tr>
+              				<td>{{doc.name}}</td>
+							<td>{{doc.category.name}}</td>
+							<td></td>
+							<td></td>         
+							<td><a href="/del_doc/{{doc.id}}">{% bootstrap_icon 'remove' %}</a></td>     				
+              			</tr>
+              		{% endif %}
+              		{% endfor %}
+              	{% endif %}
+              </tbody>
+            </table>
+
+
+
+			<h2 class="sub-header">Add a Document File</h2>
+			<form enctype="multipart/form-data" action="/add_doc/{{corpus.id}}/" method="post">{% csrf_token %}
+				<table>
+					<tr><td><label for="{{doc_form.name.id_for_label}}">File Name:</label></td><td>{{doc_form.name}}</td></tr>
+					<tr><td><b>Category:</b></td><td><select name="category">
+					{% for cat in categories %}
+					<option value={{cat.name}}{% if cat.id == this_category.id %} selected="selected"{% endif %}>{{cat.name}}</option>
+					{% endfor %}					
+					<tr><td><label for="{{doc_form.file.id_for_label}}">Select File:</label></td><td>{{doc_form.file}}</td></tr>
+					</td></tr>
+				</table>
+			
+				<button class="btn btn-sm btn-primary" type="submit" name="submit">Upload Document</button>
+			</form>
+			
+            
+            
+          </div>
+        </div>
+
+{% endblock %}

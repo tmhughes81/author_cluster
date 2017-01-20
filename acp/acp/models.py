@@ -26,8 +26,50 @@ class Category(models.Model):
     """ A sub-category attached to a corpus (often an author) """
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
-    color = models.CharField(max_length=64, default='blue')
-    mark = models.CharField(max_length=64, default='*')
+    
+    COLOR_OPTIONS = (
+                     ('b', 'blue'),
+                     ('g', 'green'), 
+                     ('r', 'red'), 
+                     ('c', 'cyan'), 
+                     ('m', 'magenta'), 
+                     ('y', 'yellow'), 
+                     ('k', 'black'), 
+                    )
+    
+    color = models.CharField(max_length=64, default='k', choices=COLOR_OPTIONS)
+    
+    MARK_OPTIONS = (
+                    ('.', 'point'),
+                    (',', 'pixel'),
+                    ('o', 'circle'),
+                    ('v', 'triangle_down'),
+                    ('^', 'triangle_up'),
+                    ('<', 'triangle_left'),
+                    ('>', 'triangle_right'),
+                    ('8', 'octagon'),
+                    ('s', 'square'),
+                    ('p', 'pentagon'),
+                    ('*', 'star'),
+                    ('h', 'hexagon1'),
+                    ('H', 'hexagon2'),
+                    ('+', 'plus'),
+                    ('x', 'x'),
+                    ('D', 'diamond'),
+                    ('d', 'thin_diamond'),
+                    ('|', 'vline'),
+                    ('_', 'hline'),
+                    ('TICKLEFT', 'tickleft'),
+                    ('TICKRIGHT', 'tickright'),
+                    ('TICKUP', 'tickup'),
+                    ('TICKDOWN', 'tickdown'),
+                    ('CARETLEFT', 'caretleft'),
+                    ('CARETRIGHT', 'caretright'),
+                    ('CARETUP', 'caretup'),
+                    ('CARETDOWN', 'caretdown'),
+                )
+    
+    mark = models.CharField(max_length=64, default='o', choices=MARK_OPTIONS)
     labels = models.BooleanField(default=False)
 
 class Document(models.Model):

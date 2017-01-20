@@ -86,14 +86,30 @@ def create_corpus(request):
 
 def del_corpus(request, corpus_id):
     """ Deletes a corpus """
-    if not Corpus.objects.filter(id=corpus_id).exists():
+    try:
+        corpus = Corpus.objects.get(id=corpus_id)
+    except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
+    
+    # User does not have permission to delete corpa that do not belong to them
+    if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
+        return HttpResponseRedirect('/perm_error/')
+    
     
     Corpus.objects.get(id=corpus_id).delete()
     
     return HttpResponseRedirect('/dashboard/')
 
 def add_doc(request, corpus_id):
+    try:
+        corpus = Corpus.objects.get(id=corpus_id)
+    except Corpus.DoesNotExist:
+        return HttpResponseRedirect('/corpus/not_found/')
+    
+    # User does not have permission to delete corpa that do not belong to them
+    if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
+        return HttpResponseRedirect('/perm_error/')
+    
     if request.POST:
         form = AddDocForm(request.POST, request.FILES)
         if form.is_valid():
@@ -111,8 +127,19 @@ def add_doc(request, corpus_id):
     return HttpResponseRedirect(url)
 
 def add_cat(request, corpus_id):
+    try:
+        corpus = Corpus.objects.get(id=corpus_id)
+    except Corpus.DoesNotExist:
+        return HttpResponseRedirect('/corpus/not_found/')
+    
+    # User does not have permission to delete corpa that do not belong to them
+    if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
+        return HttpResponseRedirect('/perm_error/')
+    
     if request.POST:
-        form = AddCatForm(request.POST)
+        instance = Category.objects.get(id=request.POST['id'])
+        
+        form = AddCatForm(request.POST, instance=instance)
         if form.is_valid():
             cat_form = form.save(commit=False)
             cat_form.corpus = Corpus.objects.get(id=corpus_id)
@@ -125,23 +152,49 @@ def add_cat(request, corpus_id):
     return HttpResponseRedirect(url)
 
 def del_doc(request, doc_id):
+    try:
+        doc = Document.objects.get(id=doc_id)
+    except:
+        return HttpResponseRedirect('/doc/not_found/')
+    
+    try:
+        corpus = Corpus.objects.get(id=doc.corpus.id)
+    except Corpus.DoesNotExist:
+        return HttpResponseRedirect('/corpus/not_found/')
+    
+    # User does not have permission to delete corpa that do not belong to them
+    if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
+        return HttpResponseRedirect('/perm_error/')
+
+    
     """ Deletes a document """
     if not Document.objects.filter(id=doc_id).exists():
         return HttpResponseRedirect('/corpus/not_found/')
     
-    doc = Document.objects.get(id=doc_id)
+    
     doc.delete()
     
-    return HttpResponseRedirect('/dashboard/')
+    return HttpResponseRedirect('/corpus/'+str(corpus.id))
 
 def del_cat(request, cat_id):
     """ Deletes a category """
-    if not Category.objects.filter(id=cat_id).exists():
+    try:
+        cat = Category.objects.get(id=cat_id)
+    except:
+        return HttpResponseRedirect('/cat/not_found/')
+    
+    try:
+        corpus = Corpus.objects.get(id=cat.corpus.id)
+    except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
+    # User does not have permission to delete corpa that do not belong to them
+    if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
+        return HttpResponseRedirect('/perm_error/')
+
     Category.objects.get(id=cat_id).delete()
     
-    return HttpResponseRedirect('/dashboard/')
+    return HttpResponseRedirect('/corpus/'+str(corpus.id))
 
 def visualize(request):
     if not request.POST:
@@ -151,7 +204,41 @@ def visualize(request):
     
     corpus = Corpus.objects.get(id=request.POST['corpus_id'])
     
+    if Document.objects.filter(corpus=corpus).count() < 2:
+        return HttpResponseRedirect('/perm_error/')
+    
     create_visual(corpus)
     
     return HttpResponseRedirect('/corpus/'+str(corpus.id))
+
+def cat(request, cat_id):
+
+    args = {}
     
+    this_category = Category.objects.get(id=cat_id)
+    
+    args.update({'this_category': this_category})
+    
+    args.update({'corpus': this_category.corpus})
+    
+    categories = Category.objects.filter(corpus=this_category.corpus)
+    
+    args.update({'categories': categories})
+    
+    documents = Document.objects.filter(category=this_category)
+    
+    args.update({'documents': documents})
+    
+    cat_form = AddCatForm(instance=this_category)
+    args.update({'cat_form': cat_form})
+    
+    doc_form = AddDocForm()
+    
+    args.update({'doc_form': doc_form})
+    
+    return render(request, "cat.html", args)
+
+def perm_error(request):
+    args = {}
+    
+    return render(request, 'perm_error.html', args)
