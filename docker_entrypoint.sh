@@ -21,4 +21,5 @@ exec gunicorn wsgi:application \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
     --preload \
+    --keep-alive 5 \
     "$@"
