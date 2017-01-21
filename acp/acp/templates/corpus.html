@@ -14,7 +14,7 @@
     <div class="col-sm-3 col-md-2 sidebar"  style="padding-top: 38px;">
       <ul class="nav nav-sidebar">
         <li><a href="/dashboard/">Corpa Overview</a></li>
-        <li class="active"><a href="/corpus/{{corpus.id}}/">Corpa Categories: <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="/corpus/{{corpus.id}}/">Corpus's Categories: <span class="sr-only">(current)</span></a></li>
         {% if categories %}
         	{% for category in categories %}
         		<li><a href="/cat/{{category.id}}/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{category.name}}</a></li>
