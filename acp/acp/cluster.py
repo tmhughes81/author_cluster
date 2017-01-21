@@ -30,7 +30,7 @@ def create_visual(corpus):
     # TF-IDF the dataset
     from sklearn.feature_extraction.text import TfidfVectorizer
 
-    vec = TfidfVectorizer()
+    vec = TfidfVectorizer(decode_error=u'ignore')
     
     tf_idf_vec = vec.fit_transform(dataset['meta_body'])
     

@@ -171,7 +171,7 @@ def add_cat(request, corpus_id):
             cat_form.corpus = Corpus.objects.get(id=corpus_id)
             cat_form.save()
             
-            cat_form.corpus.cat_count = Document.objects.filter(corpus=cat_form.corpus).count()
+            cat_form.corpus.cat_count = Category.objects.filter(corpus=cat_form.corpus).count()
             cat_form.corpus.save()
             
     else:
