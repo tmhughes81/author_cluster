@@ -211,7 +211,14 @@ def visualize(request):
     if Document.objects.filter(corpus=corpus).count() < 2:
         return HttpResponseRedirect('/perm_error/')
     
-    create_visual(corpus)
+    import threading
+
+    t = threading.Thread(target=create_visual,
+                            args=[corpus])
+    t.setDaemon(True)
+    t.start()
+    
+    
     
     return HttpResponseRedirect('/corpus/'+str(corpus.id))
 

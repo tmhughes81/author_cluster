@@ -36,7 +36,8 @@
 		  {% endif %}
           <form action="/visualize/" method="post">{% csrf_token %}
           	<input type="hidden" name="corpus_id" value="{{corpus.id}}">
-			<center><button class="btn btn-sm btn-primary" type="submit" name="visualize">Visualize Corpus</button></center>
+			<center>Notice: Visualizations are generated in the background and will update when ready.<br>
+			<button class="btn btn-sm btn-primary" type="submit" name="visualize">Visualize Corpus</button></center>
 		  </form>
           
 		  <h2 class="sub-header">Available Categories</h2>
