@@ -88,7 +88,7 @@
           <h1 class="page-header">Cluster Dashboard</h1>
           
 		  
-          <h2 class="sub-header">Available Corpa</h2>
+          <h2 class="sub-header">Public Corpa</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -101,8 +101,8 @@
                 </tr>
               </thead>
               <tbody>
-              	{% if corpa %}
-              		{% for corpus in corpa %}
+              	{% if public_corpa %}
+              		{% for corpus in public_corpa %}
               			<tr>
               				<td><a href='/corpus/{{corpus.id}}/'>{{corpus.name}}</a></td>
 							<td>{{corpus.cat_count}}</td>
@@ -115,6 +115,36 @@
               </tbody>
             </table>
           </div>
+		  
+		  {% if my_corpa_owned %}
+          <h2 class="sub-header">My Corpa</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Corpus</th>
+                  <th>Categories</th>
+                  <th>Documents</th>
+                  <th>Public</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+              	
+              		{% for my in my_corpa_owned %}
+              			<tr>
+              				<td><a href='/corpus/{{my.corpus.id}}/'>{{my.corpus.name}}</a></td>
+							<td>{{my.corpus.cat_count}}</td>
+							<td>{{my.corpus.doc_count}}</td>
+							<td>{{my.corpus.public}}</td>         
+							<td><a href="/del_corpus/{{my.corpus.id}}">{% bootstrap_icon 'remove' %}</a></td>     				
+              			</tr>
+              		{% endfor %}
+              	
+              </tbody>
+            </table>
+          </div>
+          {% endif %}         
 			<h2 class="sub-header">Create a New Corpus</h2>
 			<form action="/create_corpus/" method="post">{% csrf_token %}
 				<table>
