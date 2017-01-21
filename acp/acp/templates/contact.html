@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block index_menu %}
+  <li><a href="/">Home</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+  <li class="active"><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block cover_content %}
+  <div class="inner cover" style="background-color: lightslategray; border-radius: 10px;padding-top: 40px;padding-bottom: 10px;">
+    <h1 class="cover-heading" font="Monteserrat">Contact Info</h1>
+    <p class="lead" font="Monteserrat">Direct all inquiries to:</p>
+    <p class="lead">
+      <a href="mailto:tmhughes@tmhughes.org" class="btn btn-lg btn-default">tmhughes@tmhughes.org</a>
+    </p>
+  </div>
+{% endblock %}

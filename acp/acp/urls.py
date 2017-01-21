@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^visualize/$', views.visualize, name='visualize'),
     url(r'^cat/(?P<cat_id>\d+)/$', views.cat, name='cat'),
     url(r'^perm_error/$', views.perm_error, name='perm_error'),
+    url(r'^contact', views.contact, name='contact'),
     
 ]

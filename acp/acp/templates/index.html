@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load socialaccount %}
+{% load bootstrap3 %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,17 +36,12 @@
     <title>Document Clustering Project</title>
 
     <!-- Bootstrap core CSS -->
-   <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{% static "bootstrap/css/ie10-viewport-bug-workaround.css" %} rel="stylesheet">
-
+	{# Load CSS and JavaScript #}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}	
+	
     <!-- Custom styles for this template -->
     <link href={% static "bootstrap/css/cover.css" %} rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -66,14 +63,16 @@
               <h3 class="masthead-brand">Document Clustering Project</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
+                {% block index_menu %}
+                  <li class="active"><a href="/">Home</a></li>
                   <li><a href="/faq/">FAQ</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="/contact/">Contact</a></li>
+                 {% endblock %}
                 </ul>
               </nav>
             </div>
           </div>
-
+		{% block cover_content %}
           <div class="inner cover" style="background-color: lightslategray; border-radius: 10px;padding-top: 40px;padding-bottom: 10px;">
             <h1 class="cover-heading" font="Monteserrat">Welcome!</h1>
             <p class="lead" font="Monteserrat">You have reached the Document Clustering Project, an open source WebApp for visualizing patterns of word uses in corpa of texts.</p>
@@ -81,7 +80,7 @@
               <a href="{% provider_login_url "google" %}" class="btn btn-lg btn-default">Login with Google</a>
             </p>
           </div>
-
+		{% endblock %}
           <div class="mastfoot">
             <div class="inner">
               <p>Copyright (c) 2017, Thomas M Hughes</p>
@@ -98,9 +97,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

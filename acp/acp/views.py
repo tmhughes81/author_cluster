@@ -12,6 +12,10 @@ def index(request):
     args = {}
     return render(request, "index.html", args)
 
+def contact(request):
+    args = {}
+    return render(request, "contact.html", args)
+
 def dashboard(request):
     """ Lists all available corpa to a user """
     args = {}
