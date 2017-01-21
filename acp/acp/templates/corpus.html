@@ -48,7 +48,6 @@
                   <th>Category Title</th>
                   <th>Mark</th>
                   <th>Color</th>
-                  <th>Labels</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -59,7 +58,6 @@
               				<td>{{category.name}}</td>
 							<td>{{category.mark}}</td>
 							<td>{{category.color}}</td>
-							<td>{{category.labels}}</td>         
 							<td><a href="/del_cat/{{category.id}}">{% bootstrap_icon 'remove' %}</a></td>     				
               			</tr>
               		{% endfor %}
