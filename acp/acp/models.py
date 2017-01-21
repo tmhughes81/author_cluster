@@ -8,11 +8,17 @@ class Corpus(models.Model):
     public = models.BooleanField(default=False)
     cat_count = models.IntegerField(default=0)
     doc_count = models.IntegerField(default=0)
+    
+    class Meta:
+        ordering = ['name']
 
 class CorpusOwners(models.Model):
     """ More than one person can own a Corpus; this gives them editing rights """
     corpus = models.ForeignKey('Corpus')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    
+    class Meta:
+        ordering = ['corpus']
     
     """ Gets called as part of corpus creation """    
     @classmethod
@@ -26,6 +32,9 @@ class Category(models.Model):
     """ A sub-category attached to a corpus (often an author) """
     name = models.CharField(max_length=64)
     corpus = models.ForeignKey('Corpus')
+    
+    class Meta:
+        ordering = ['corpus', 'name']
     
     COLOR_OPTIONS = (
                      ('b', 'blue'),
@@ -79,7 +88,10 @@ class Document(models.Model):
     corpus = models.ForeignKey('Corpus')
     category = models.ForeignKey('Category')
     file = models.FileField(default=None, blank=True)
-
+    
+    class Meta:
+        ordering = ['category', 'name']
+    
     # Clean up file when model is deleted
     def delete(self,*args,**kwargs):
         self.file.delete()
