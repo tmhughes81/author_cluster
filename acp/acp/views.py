@@ -5,6 +5,7 @@ from forms import CreateCorpusForm, AddDocForm, AddCatForm
 from models import Corpus, CorpusOwners, Category, Document, Visual
 from django.contrib.auth.models import User
 from cluster import create_visual
+from django.utils.datastructures import MultiValueDictKeyError
 
 def index(request):
     args = {}
@@ -137,9 +138,12 @@ def add_cat(request, corpus_id):
         return HttpResponseRedirect('/perm_error/')
     
     if request.POST:
-        instance = Category.objects.get(id=request.POST['id'])
+        try:
+            instance = Category.objects.get(id=request.POST['id'])
+            form = AddCatForm(request.POST, instance=instance)
+        except MultiValueDictKeyError:
+            form = AddCatForm(request.POST)
         
-        form = AddCatForm(request.POST, instance=instance)
         if form.is_valid():
             cat_form = form.save(commit=False)
             cat_form.corpus = Corpus.objects.get(id=corpus_id)
