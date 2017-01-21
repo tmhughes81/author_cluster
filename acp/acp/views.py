@@ -49,9 +49,12 @@ def corpus(request, corpus_id):
     
     args.update({'doc_form': doc_form})
     
-    visual = Visual.objects.get(corpus=corpus)
-    args.update({'visual': visual})
-    args.update({'visual_file': 'corpa/'+str(visual.file)})
+    try:
+        visual = Visual.objects.get(corpus=corpus)
+        args.update({'visual': visual})
+        args.update({'visual_file': 'corpa/'+str(visual.file)})
+    except Visual.DoesNotExist:
+        pass
     
     return render(request, "corpus.html", args)
     
