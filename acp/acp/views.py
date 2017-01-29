@@ -17,24 +17,24 @@ def contact(request):
     return render(request, "contact.html", args)
 
 def dashboard(request):
-    """ Lists all available corpa to a user """
+    """ Lists all available corpora to a user """
     args = {}
     
-    # First list the public corpa
+    # First list the public corpora
     try:
-        public_corpa = Corpus.objects.filter(public=True)
-        args.update({'public_corpa': public_corpa})
+        public_corpora = Corpus.objects.filter(public=True)
+        args.update({'public_corpora': public_corpora})
     except:
         pass
     
-    # Then try the user's corpa; double list public corpa
+    # Then try the user's corpora; double list public corpora
     try:
-        my_corpa_owned = CorpusOwners.objects.filter(owner=request.user)
-        args.update({'my_corpa_owned': my_corpa_owned})
+        my_corpora_owned = CorpusOwners.objects.filter(owner=request.user)
+        args.update({'my_corpora_owned': my_corpora_owned})
     except CorpusOwners.DoesNotExist:
         pass
     
-    # Add a form for creating new corpa
+    # Add a form for creating new corpora
     form = CreateCorpusForm()
     
     args.update({'form': form})
@@ -68,7 +68,7 @@ def corpus(request, corpus_id):
     try:
         visual = Visual.objects.get(corpus=corpus)
         args.update({'visual': visual})
-        args.update({'visual_file': 'corpa/'+str(visual.file)})
+        args.update({'visual_file': 'corpora/'+str(visual.file)})
     except Visual.DoesNotExist:
         pass
     
@@ -111,7 +111,7 @@ def del_corpus(request, corpus_id):
     except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
-    # User does not have permission to delete corpa that do not belong to them
+    # User does not have permission to delete corpora that do not belong to them
     if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
         return HttpResponseRedirect('/perm_error/')
     
@@ -126,7 +126,7 @@ def add_doc(request, corpus_id):
     except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
-    # User does not have permission to delete corpa that do not belong to them
+    # User does not have permission to delete corpora that do not belong to them
     if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
         return HttpResponseRedirect('/perm_error/')
     
@@ -155,7 +155,7 @@ def add_cat(request, corpus_id):
     except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
-    # User does not have permission to delete corpa that do not belong to them
+    # User does not have permission to delete corpora that do not belong to them
     if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
         return HttpResponseRedirect('/perm_error/')
     
@@ -192,7 +192,7 @@ def del_doc(request, doc_id):
     except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
-    # User does not have permission to delete corpa that do not belong to them
+    # User does not have permission to delete corpora that do not belong to them
     if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
         return HttpResponseRedirect('/perm_error/')
 
@@ -222,7 +222,7 @@ def del_cat(request, cat_id):
     except Corpus.DoesNotExist:
         return HttpResponseRedirect('/corpus/not_found/')
     
-    # User does not have permission to delete corpa that do not belong to them
+    # User does not have permission to delete corpora that do not belong to them
     if not CorpusOwners.objects.filter(owner=request.user, corpus=corpus).exists():
         return HttpResponseRedirect('/perm_error/')
 
