@@ -78,7 +78,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar"  style="padding-top: 38px;">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/dashboard/">Corpa Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/dashboard/">Corpora Overview <span class="sr-only">(current)</span></a></li>
           </ul>
        </div>
        {% endblock %}
@@ -89,7 +89,7 @@
           <h1 class="page-header">Cluster Dashboard</h1>
           
 		  
-          <h2 class="sub-header">Public Corpa</h2>
+          <h2 class="sub-header">Public Corpora</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -102,8 +102,8 @@
                 </tr>
               </thead>
               <tbody>
-              	{% if public_corpa %}
-              		{% for corpus in public_corpa %}
+              	{% if public_corpora %}
+              		{% for corpus in public_corpora %}
               			<tr>
               				<td><a href='/corpus/{{corpus.id}}/'>{{corpus.name}}</a></td>
 							<td>{{corpus.cat_count}}</td>
@@ -117,8 +117,8 @@
             </table>
           </div>
 		  
-		  {% if my_corpa_owned %}
-          <h2 class="sub-header">My Corpa</h2>
+		  {% if my_corpora_owned %}
+          <h2 class="sub-header">My Corpora</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -132,7 +132,7 @@
               </thead>
               <tbody>
               	
-              		{% for my in my_corpa_owned %}
+              		{% for my in my_corpora_owned %}
               			<tr>
               				<td><a href='/corpus/{{my.corpus.id}}/'>{{my.corpus.name}}</a></td>
 							<td>{{my.corpus.cat_count}}</td>
