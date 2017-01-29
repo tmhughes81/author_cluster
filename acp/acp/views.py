@@ -68,7 +68,7 @@ def corpus(request, corpus_id):
     try:
         visual = Visual.objects.get(corpus=corpus)
         args.update({'visual': visual})
-        args.update({'visual_file': 'corpora/'+str(visual.file)})
+        args.update({'visual_file': 'corpa/'+str(visual.file)})
     except Visual.DoesNotExist:
         pass
     
